@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <title > Football Predictions and Stats Site </title>
+        <link rel="stylesheet" href = "style.css">
+    </head>
+    <body>
+        <div class="content">
+            <div class="headers">
+                <h1> All About Football </h1>
+                <h2> Predictions, Stats and More! </h2>
+            </div>
+            <div class="Paragraph1">
+                <p> Welcome to my website where you can make predictions for the league standings of your favourite teams in any of the Top 5 Leagues: La Liga, Premier League, Serie A, Bundesliga and Ligue 1. </p>
+            </div>
+            <div class="PenaltyBox">
+                <div class="Box"></div>
+                <div class="Arc"></div>
+            </div>
+        </div>
+        <div class="LeagueForm">
+            <p> Pick A League</p>
+            <label for="Leagues"> </label>
+            <select id="LeagueSection" name="Leagues"> 
+                <option value="" disabled selected> Select a League </option>
+                <option value="EPL"> Premier League </option>
+                <option value="LaLiga"> La Liga </option>
+                <option value="SerieA"> Serie A </option>
+                <option value="Bundesliga"> Bundesliga </option>
+                <option value="Ligue1"> Ligue 1 </option>
+            </select>
+        </div>
+        <div class="LeagueSection" id="LeagueTableContainer">
+        </div>
+        <p> Here you can make predictions for the Indivdual Awards for each League</p>
+        <div class="LeagueSection" id="Awards">    
+            <div class="TopScorer">
+                <h4> Top Scorer </h4>
+                <label for="TopScorer"> </label>
+                <select id="TopScorer"> 
+                    <option value="" disabled selected> Select a Player </option>
+                </select>
+            </div>
+            <div class="PlayerOfTheSeason">
+                <h4> Player of the Season </h4>
+                <label for="PlayerOfTheSeason"> </label>
+                <select id="PlayerOfTheSeason"> 
+                    <option value="" disabled selected> Select a Player </option>
+                </select>
+            </div>
+            <div class="YoungPlayerOfTheSeason">
+                <h4> Young Player of the Season </h4>
+                <label for="YoungPlayerOfTheSeason"> </label>
+                <select id="YoungPlayerOfTheSeason"> 
+                    <option value="" disabled selected> Select a Player </option>
+                </select>
+            </div>
+            <div class="GoldenGlove">
+                <h4> Golden Glove </h4>
+                <label for="GoldenGlove"> </label>
+                <select id="GoldenGlove"> 
+                    <option value="" disabled selected> Select a Player </option>
+                </select>
+            </div>
+            <div class="SigningOfTheSeason">
+                <h4> Signing of the Summer </h4>
+                <label for="SigningOfTheSeason"> </label>
+                <select id="SigningOfTheSeason"> 
+                    <option value="" disabled selected> Select a Player </option>
+                </select>
+            </div>
+            <div class="TopAssister">
+                <h4> Top Assister </h4>
+                <label for="TopAssister"> </label>
+                <select id="TopAssister"> 
+                    <option value="" disabled selected> Select a Player </option>
+                </select>
+            </div>
+        </div>
+        <div class="Submission">
+            <p> Here you can submit your predictions and they can be posted underneath for others to upvote it and downvote it.</p>
+            <form action="" method="GET" class="NameForm">
+            <div class="NameForm">
+              <label for="name">Enter your name: </label>
+              <input type="text" name="name" id="name" required />
+              <button class="PredictionsSubmission" type="button"> Submit Your Predictions </button>
+            </div>
+        </div>
+        <div class="CommentSection">
+            <h5> Comment Section </h5>
+            <p> Here you can look at other users' predictions and give your opinion on them to see who has the most popular one!</p>
+            <div class="CommentBoxes">
+                <div class="Comment">
+                    <h5> John Doe - Example League </h5>
+                    <p> Lorem Ipsum is a placeholder text commonly used in design, publishing, and web development to fill space where real content will eventually be placed. It is derived from a scrambled section of a Latin text by Cicero but has no real meaning. It helps designers focus on layout and typography without the distraction of meaningful content.</p>
+                    <div class="Reactions">
+                        <p> Upvotes: N/A </p><button class="UpVote" type="button"> <img src="UpArrow.png"> </button> <p> Downvotes: N/A </p> <button class="DownVote" type="button"> <img src="DownArrow.png"> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h6> Thank you for having a look at my site! Hopefully your predictions come true! </h6>
+        <script src="script.js"></script>
+    </body>
+</html>
