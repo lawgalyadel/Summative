@@ -1,9 +1,9 @@
 let selectedLeague = "";
 
 document.getElementById("LeagueSection").addEventListener("change", function () {
-    const selectedLeague = this.value;
+    selectedLeague = this.value; // Updated to use the outer `selectedLeague`
     generateLeagueTable(selectedLeague);
-    updateAwardsDropdowns(selectedLeague)
+    updateAwardsDropdowns(selectedLeague);
 });
 
 let leagueData = {};
@@ -15,12 +15,15 @@ fetch('data.json')
         leagueData = data.leagueData;
         awardData = data.awardData;
         const initialLeague = Object.keys(leagueData)[0];
+        selectedLeague = initialLeague; // Ensure the selected league is set on initial load
+        generateLeagueTable(selectedLeague); // Generate the table for the first league
+        updateAwardsDropdowns(selectedLeague); // Update award dropdowns
     })
     .catch(error => console.error('Error loading JSON data:', error));
 
 function generateLeagueTable(selectedLeague) {
     const leagueTableContainer = document.getElementById("LeagueTableContainer");
-    leagueTableContainer.innerHTML = "";
+    leagueTableContainer.innerHTML = ""; // Clear previous content
 
     if (leagueData[selectedLeague]) {
         const table = document.createElement("table");
@@ -35,7 +38,6 @@ function generateLeagueTable(selectedLeague) {
 
         leagueData[selectedLeague].forEach(team => {
             const row = document.createElement("tr");
-
 
             const positionCell = document.createElement("td");
             positionCell.textContent = team.position;
@@ -56,7 +58,7 @@ function generateLeagueTable(selectedLeague) {
                 if (i === team.position) {
                     option.selected = true;
                 }
-                dropdown.appendChild(option)
+                dropdown.appendChild(option);
             }
 
             dropdown.addEventListener("change", function () {
@@ -65,7 +67,6 @@ function generateLeagueTable(selectedLeague) {
             });
 
             dropdownCell.appendChild(dropdown);
-
             row.appendChild(positionCell);
             row.appendChild(teamCell);
             row.appendChild(dropdownCell);
@@ -73,13 +74,10 @@ function generateLeagueTable(selectedLeague) {
         });
 
         leagueTableContainer.appendChild(table);
-    }
-    else {
+    } else {
         leagueTableContainer.innerHTML = "<p>No data available for this league.</p>"; 
     }
 }
-
-document.getElementById("PredictionsSubmission").addEventListener("click", submitPrediction);
 
 function moveTeam(leagueName, teamName, newPosition) {
     const league = leagueData[leagueName];
@@ -108,7 +106,7 @@ function updateAwardsDropdowns(selectedLeague) {
             const dropdown = awardDropdowns[category];
 
             if (dropdown) {
-                dropdown.innerHTML = '<option value="" disabled selected>Select a Player</option>'; 
+                dropdown.innerHTML = '<option value="" disabled selected>Select a Player</option>'; // Reset options
 
                 if (awardData[selectedLeague][category]) {
                     awardData[selectedLeague][category].forEach(player => {
@@ -127,12 +125,12 @@ function submitPrediction() {
     const selectedLeague = document.getElementById("LeagueSection").value;
     const name = document.getElementById("name").value.trim();
     const playerPredictions = {
-        topScorer: document.getElementById("TopScorer").value ,
-        playerOfTheSeason: document.getElementById("PlayerOfTheSeason").value ,
-        youngPlayerOfTheSeason: document.getElementById("YoungPlayerOfTheSeason").value ,
-        goldenGlove: document.getElementById("GoldenGlove").value ,
-        signingOfTheSeason: document.getElementById("SigningOfTheSeason").value ,
-        topAssister: document.getElementById("TopAssister").value 
+        topScorer: document.getElementById("TopScorer").value,
+        playerOfTheSeason: document.getElementById("PlayerOfTheSeason").value,
+        youngPlayerOfTheSeason: document.getElementById("YoungPlayerOfTheSeason").value,
+        goldenGlove: document.getElementById("GoldenGlove").value,
+        signingOfTheSeason: document.getElementById("SigningOfTheSeason").value,
+        topAssister: document.getElementById("TopAssister").value
     };
 
     const leagueRankings = {};
@@ -140,7 +138,7 @@ function submitPrediction() {
     const rows = leagueTableContainer.querySelectorAll("tr");
 
     rows.forEach((row, index) => {
-        if (index === 0) return;
+        if (index === 0) return; // Skip header row
 
         const teamName = row.querySelector("td:nth-child(2)").textContent.trim();
         const dropdown = row.querySelector("select");
@@ -151,27 +149,10 @@ function submitPrediction() {
         }
     });
     
-    if (!selectedLeague) {
-        alert("Please select a league before submitting!");
-        return;
-    };
-
-    if (!name) {
-        alert("Please enter your name!");
-        return;
-    };
-
-    if (Object.keys(leagueRankings).length === 0) {
-        alert("Please rank the teams before submitting!");
+    if (!selectedLeague || !name || Object.keys(leagueRankings).length === 0 || Object.values(playerPredictions).includes("")) {
+        alert("Please fill all required fields!");
         return;
     }
-
-    for (const key in playerPredictions) {
-        if (!playerPredictions[key]) {
-            alert(`Please select a player for ${key.replace(/([A-Z])/g, ' $1')}`);
-            return;
-        }
-    };
 
     const predictionData = {
         league: selectedLeague,
@@ -180,16 +161,13 @@ function submitPrediction() {
         rankings: leagueRankings
     };
 
-    console.log("Submitting:", predictionData); 
+    console.log("Submitting:", predictionData);
 
     fetch('http://localhost:3000/PredictionsSubmission', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(predictionData)
     })
-
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -209,12 +187,12 @@ function submitPrediction() {
         alert("Failed to submit prediction.");
     });
 }
+
 async function fetchPredictions() {
     try {
         const response = await fetch('http://localhost:3000/Predictions');
         if (response.ok) {
             const predictions = await response.json();
-            console.log(predictions); 
             const commentBoxesContainer = document.getElementById('CommentBoxesContainers');
             commentBoxesContainer.innerHTML = '';  
             predictions.forEach((prediction) => {
@@ -243,13 +221,3 @@ async function fetchPredictions() {
 window.onload = function() {
     fetchPredictions();
 };
-const container = document.querySelector('.container');
-function addPrediction(prediction) {
-    const newBox = document.createElement('div');
-    newBox.classList.add('box');
-    newBox.innerText = prediction;  
-    container.appendChild(newBox);
-    setTimeout(function() {
-        location.reload();
-    }, 500);
-}
