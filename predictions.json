@@ -1,0 +1,116 @@
+[
+  {
+    "league": "EPL",
+    "name": "e",
+    "predictions": {
+      "topScorer": "Alexander Isak",
+      "playerOfTheSeason": "Bukayo Saka",
+      "youngPlayerOfTheSeason": "Ethan Nwaneri",
+      "goldenGlove": "David Raya",
+      "signingOfTheSeason": "Evanilson",
+      "topAssister": "Anthony Elanga"
+    }
+  },
+  {
+    "league": "LaLiga",
+    "name": "s",
+    "predictions": {
+      "topScorer": "Kylian Mbappe",
+      "playerOfTheSeason": "Kylian Mbappe",
+      "youngPlayerOfTheSeason": "Lamine Yamal",
+      "goldenGlove": "Alex Remiro",
+      "signingOfTheSeason": "Alexander Sorloth",
+      "topAssister": "Jude Bellingham"
+    },
+    "rankings": {
+      "1": "Alavés",
+      "2": "Athletic Bilbao",
+      "3": "Atlético Madrid",
+      "4": "Barcelona",
+      "5": "Celta Vigo",
+      "6": "Espanyol",
+      "7": "Getafe",
+      "8": "Girona",
+      "9": "Leganés",
+      "10": "Las Palmas",
+      "11": "Mallorca",
+      "12": "Osasuna",
+      "13": "Rayo Vallecano",
+      "14": "Real Betis",
+      "15": "Real Madrid",
+      "16": "Real Sociedad",
+      "17": "Real Valladolid",
+      "18": "Sevilla",
+      "19": "Valencia",
+      "20": "Villarreal"
+    }
+  },
+  {
+    "league": "EPL",
+    "name": "a",
+    "predictions": {
+      "topScorer": "Chris Wood",
+      "playerOfTheSeason": "Mohamed Salah",
+      "youngPlayerOfTheSeason": "Bukayo Saka",
+      "goldenGlove": "David Raya",
+      "signingOfTheSeason": "Evanilson",
+      "topAssister": "Antonee Robinson"
+    },
+    "rankings": {
+      "1": "Arsenal",
+      "2": "Aston Villa",
+      "3": "Bournemouth",
+      "4": "Brentford",
+      "5": "Brighton & Hove Albion",
+      "6": "Chelsea",
+      "7": "Crystal Palace",
+      "8": "Everton",
+      "9": "Fulham",
+      "10": "Ipswich Town",
+      "11": "Leicester City",
+      "12": "Liverpool",
+      "13": "Manchester City",
+      "14": "Manchester United",
+      "15": "Newcastle United",
+      "16": "Nottingham Forest",
+      "17": "Southampton",
+      "18": "Tottenham Hotspur",
+      "19": "West Ham United",
+      "20": "Wolverhampton Wanderers"
+    }
+  },
+  {
+    "league": "EPL",
+    "name": "e",
+    "predictions": {
+      "topScorer": "Erling Haaland",
+      "playerOfTheSeason": "Bukayo Saka",
+      "youngPlayerOfTheSeason": "Cole Palmer",
+      "goldenGlove": "Dean Henderson",
+      "signingOfTheSeason": "Evanilson",
+      "topAssister": "Bukayo Saka"
+    },
+    "rankings": {
+      "1": "Arsenal",
+      "2": "Aston Villa",
+      "3": "Bournemouth",
+      "4": "Brentford",
+      "5": "Brighton & Hove Albion",
+      "6": "Chelsea",
+      "7": "Crystal Palace",
+      "8": "Everton",
+      "9": "Fulham",
+      "10": "Ipswich Town",
+      "11": "Leicester City",
+      "12": "Liverpool",
+      "13": "Manchester City",
+      "14": "Manchester United",
+      "15": "Newcastle United",
+      "16": "Nottingham Forest",
+      "17": "Southampton",
+      "18": "Tottenham Hotspur",
+      "19": "West Ham United",
+      "20": "Wolverhampton Wanderers"
+    }
+  }
+]
