@@ -209,3 +209,47 @@ function submitPrediction() {
         alert("Failed to submit prediction.");
     });
 }
+async function fetchPredictions() {
+    try {
+        const response = await fetch('http://localhost:3000/Predictions');
+        if (response.ok) {
+            const predictions = await response.json();
+            console.log(predictions); 
+            const commentBoxesContainer = document.getElementById('CommentBoxesContainers');
+            commentBoxesContainer.innerHTML = '';  
+            predictions.forEach((prediction) => {
+                const commentDiv = document.createElement('div');
+                commentDiv.classList.add('Comment');
+                commentDiv.dataset.id = prediction.id;
+                commentDiv.innerHTML = `
+                    <h5>${prediction.name} - ${prediction.league}</h5>
+                    <p><strong>Top Scorer:</strong> ${prediction.predictions.topScorer}</p>
+                    <p><strong>Player of the Season:</strong> ${prediction.predictions.playerOfTheSeason}</p>
+                    <p><strong>Young Player of the Season:</strong> ${prediction.predictions.youngPlayerOfTheSeason}</p>
+                    <p><strong>Golden Glove:</strong> ${prediction.predictions.goldenGlove}</p>
+                    <p><strong>Signing of the Season:</strong> ${prediction.predictions.signingOfTheSeason}</p>
+                    <p><strong>Top Assister:</strong> ${prediction.predictions.topAssister}</p>
+                    <p><strong>Ranking:</strong> ${Object.entries(prediction.rankings).map(([rank, team]) => `${rank}. ${team}`).join('<br>')}</p>
+                `;
+                commentBoxesContainer.appendChild(commentDiv);
+            });
+        } else {
+            console.error('Error fetching predictions');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+window.onload = function() {
+    fetchPredictions();
+};
+const container = document.querySelector('.container');
+function addPrediction(prediction) {
+    const newBox = document.createElement('div');
+    newBox.classList.add('box');
+    newBox.innerText = prediction;  
+    container.appendChild(newBox);
+    setTimeout(function() {
+        location.reload();
+    }, 500);
+}

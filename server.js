@@ -5,6 +5,19 @@ const app = express();
 const port = 3000;
 const cors = require('cors');
 const predictionsFile = path.join(__dirname, 'predictions.json');
+const ensureFileExists = (filePath) => {
+    if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, JSON.stringify([], null, 2));
+        console.log(`New predictions file created at ${filePath}`);
+    } else {
+        const data = fs.readFileSync(filePath, 'utf8');
+        if (!data.trim()) {
+            fs.writeFileSync(filePath, JSON.stringify([], null, 2));
+            console.log(`Predictions file was empty, resetting to empty array.`);
+        }
+    }
+};
+ensureFileExists(predictionsFile);
 app.use(cors({
     origin: 'http://127.0.0.1:5500', 
     methods: ['GET', 'POST'],  
@@ -15,11 +28,11 @@ app.use(express.json());
 const loadPredictions = () => {
     try {
         if (!fs.existsSync(predictionsFile)) {
-            return [];  // File doesn't exist, return empty array
+            return [];
         }
         const data = fs.readFileSync(predictionsFile, 'utf8');
         
-        if (!data.trim()) {  // If file is empty or only spaces/newlines
+        if (!data.trim()) {
             return [];
         }
         
@@ -30,9 +43,16 @@ const loadPredictions = () => {
     }
 };
 const savePredictions = (predictions) => {
-    fs.writeFileSync(predictionsFile, JSON.stringify(predictions, null, 2));
-};
+    console.log("Saving predictions to file:", predictions);
+    console.log("Predictions file path:", predictionsFile);
 
+    try {
+        fs.writeFileSync(predictionsFile, JSON.stringify(predictions, null, 2));
+        console.log("Predictions saved successfully!");
+    } catch (err) {
+        console.error("Error writing to predictions file:", err);
+    }
+};
 app.get('/data.json', (req, res) => {
     fs.readFile(path.join(__dirname, 'public', 'data.json'), 'utf8', (err, data) => {
         if (err) {
@@ -63,6 +83,7 @@ app.post('/PredictionsSubmission', (req, res) => {
     savePredictions(predictions);
     res.json({ message: "Prediction submitted successfully!" });
 });
+
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
